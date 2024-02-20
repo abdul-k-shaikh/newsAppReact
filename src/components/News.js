@@ -6,7 +6,7 @@ export class News extends Component {
     super();
     console.log("Hello I am a constructor from news componenet");
     this.state = {
-     articles:this.articles,
+     articles:[],
      loading: false
     }
   }
