@@ -7,7 +7,8 @@ export class News extends Component {
     console.log("Hello I am a constructor from news componenet");
     this.state = {
      articles:[],
-     loading: false
+     loading: false,
+     page:1
     }
   }
 
@@ -17,7 +18,7 @@ export class News extends Component {
     let data = await fetch(url);
     let parsedData = await data.json()
     console.log(parsedData);
-    this.setState({articles: parsedData.articles});
+    this.setState({articles: parsedData.articles, totalArticles:parsedData.totalArticles});
   }
   handlePrevClick = async ()=>{
     console.log("Previous")
@@ -33,8 +34,11 @@ export class News extends Component {
 
   handleNextClick = async () =>{
     console.log("Next");
+    if(this.state.page+1 > Math.ceil(this.state.totalArticles/20)){
 
-    let url= `https://newsapi.org/v2/top-headlines?country=in&apiKey=dc0b7f4c367c4b679e8e1fe8b065a4de&page=${this.state.page+1}pageSize=20`;
+    }
+    else{
+      let url= `https://newsapi.org/v2/top-headlines?country=in&apiKey=dc0b7f4c367c4b679e8e1fe8b065a4de&page=${this.state.page+1}&pageSize=20`;
     let data = await fetch(url);
     let parsedData = await data.json()
     console.log(parsedData);
@@ -43,6 +47,7 @@ export class News extends Component {
       page: this.state.page + 1,
       articles: parsedData.articles
     })
+    }
 }
   
 
