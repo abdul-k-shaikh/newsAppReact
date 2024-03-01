@@ -34,7 +34,7 @@ export class News extends Component {
 
   handleNextClick = async () =>{
     console.log("Next");
-    if(this.state.page+1 > Math.ceil(this.state.totalArticles/20)){
+    if(this.state.page+1 > Math.ceil(this.state.totalResults/20)){
 
     }
     else{
@@ -54,7 +54,8 @@ export class News extends Component {
   render() {
     return (
       <div className="container my-3">
-        <h2>NewsMonkey - Top Headlines</h2>
+        
+        <h2 className="text-center">NewsMonkey - Top Headlines</h2>
         
         <div className="row">
         {this.state.articles.map((element)=>{
