@@ -29,15 +29,10 @@ export class Navbar extends Component {
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" to="/home">
+                  <Link className="nav-link active" aria-current="page" to="/home">
                     Home
-                  </a>
-                </li>
-                {/* <li className="nav-item">
-                  <Link className="nav-link" to="/about">
-                    About
                   </Link>
-                </li> */}
+                </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/business">Business</Link></li>
                 <li className="nav-item">
