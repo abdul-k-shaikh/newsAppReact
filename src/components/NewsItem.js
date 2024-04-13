@@ -1,11 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-export class NewsItem extends Component {
-  constructor() {
-    super();
-    console.log("Hello I am a constructor");
-  }
-  render() {
+const NewsItem = (props) => {
+
     let { title, description, imageUrl, newsUrl, author, date, source } = this.props;
     return (
       <div className="my-3">
@@ -21,7 +17,7 @@ export class NewsItem extends Component {
           />
           <div className="card-body">
             <h5 className="card-title">
-              {title}
+              {this.title}
               <span className="position-absolute top-0 translate-middle badge rounded-pill bg-success" style={{left:'90%', zIndex:'1'}}>
                 {source}  
               </span>
@@ -45,7 +41,7 @@ export class NewsItem extends Component {
         </div>
       </div>
     );
-  }
+  
 }
 
 export default NewsItem;
