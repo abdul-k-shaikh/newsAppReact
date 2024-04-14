@@ -22,13 +22,13 @@ const News =(props)=> {
   //    page:1,
   //    totalResults:0
   //   }
-  //   // document.title=`${this.capitalizeFirstLetter(props.category)} - NewsMonkey`
+  //   document.title=`${this.capitalizeFirstLetter(props.category)} - NewsMonkey`
   // }
 
   const updateNews = async ()=>{  
     props.setProgress(10);
-    const url= `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=1&pageSize=${props.pageSize}`;
-    setState({loading:true});
+    const url= `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+    setLoading(true);
     let data = await fetch(url);
     props.setProgress(30);
     let parsedData = await data.json()
@@ -37,16 +37,19 @@ const News =(props)=> {
     settotalResult(parsedData.totalResults)
     setLoading(false);
     console.log(parsedData);
-    this.setState({
-      articles: parsedData.articles, 
-      totalResults:parsedData.totalResults,
-      loading: false
-    });
+    // props.setState({
+    //   articles: parsedData.articles, 
+    //   totalResults:parsedData.totalResults,
+    //   loading: false
+    // });
+    setLoading(false)
     props.setProgress(100);
   }
 
   useEffect(() =>{
     updateNews();
+    document.title=`${this.capitalizeFirstLetter(props.category)} - NewsMonkey`
+    // eslint-disable-next-line
   },[])
   
   const handlePrevClick = async ()=>{
@@ -56,13 +59,12 @@ const News =(props)=> {
 
   const handleNextClick = async () =>{
       setPage(page+1)
-      updateNews()
+      updateNews();
     }
 
   const fetchMoreData=async()=>{
+      const url= `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${props.page}&pageSize=${props.pageSize}`;
       setPage(page+1);
-     
-      const url= `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=$(page)&pageSize=${props.pageSize}`;
     // setState({loading:true});
     setLoading(true);
     let data = await fetch(url);
@@ -85,13 +87,13 @@ const News =(props)=> {
         </h1>
         {loading && <SpinnerC/>}
 
-        <InfiniteScroll
+        {/* <InfiniteScroll
           dataLength={articles.length}
           next={fetchMoreData}
           hasMore={articles.length!==totalResults}
           loader={<h4>Loading...</h4>}
           style={{ overflow: "hidden"  }}
-        >
+        > */}
       <div className="container">
 
         <div className="row">
@@ -105,10 +107,10 @@ const News =(props)=> {
         })} 
         </div>
         </div>
-        </InfiniteScroll>
+        {/* </InfiniteScroll> */}
         <div className="container d-flex justify-content-between">
-        <button disabled={this.state.page<=1} type="button" className="btn btn-dark" onClick={this.handlePrevClick}> &larr; Previous</button>
-        <button disabled={this.state.page+1 > Math.ceil(this.state.totalResults/props.pageSize)} type="button" className="btn btn-dark" onClick={this.handleNextClick}>Next &rarr;</button>
+        <button disabled={props.state.page<=1} type="button" className="btn btn-dark" onClick={props.handlePrevClick}> &larr; Previous</button>
+        <button disabled={props.state.page+1 > Math.ceil(props.state.totalResults/props.pageSize)} type="button" className="btn btn-dark" onClick={props.handleNextClick}>Next &rarr;</button>
         </div>
       </>
     );
