@@ -12,19 +12,6 @@ const News =(props)=> {
   
   // document.title=`${this.capitalizeFirstLetter(props.category)} - NewsMonkey`
 
-
-  // constructor(){
-  //   super();
-  //   console.log("Hello I am a constructor from news componenet");
-  //   this.state = {
-  //    articles:[],
-  //    loading: true,
-  //    page:1,
-  //    totalResults:0
-  //   }
-  //   document.title=`${this.capitalizeFirstLetter(props.category)} - NewsMonkey`
-  // }
-
   const updateNews = async ()=>{  
     props.setProgress(10);
     const url= `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;

@@ -1,6 +1,4 @@
-
 import './App.css';
-
 import React,{useState} from 'react'
 import Navbar from './components/Navbar';
 import News from './components/News';
@@ -26,8 +24,7 @@ const App =() => {
         height={3}  
         color='#f11946'
         progress={progress}
-        
-      />
+        />
           <Switch>
             <Route exact path="/"><News setProgress={setProgress} apiKey={apiKey} key="general" pageSize={pageSize} country="in" category="general"/></Route>
             <Route exact path="/business"><News setProgress={setProgress} apiKey={apiKey} key="business"  pageSize={pageSize} country="in" category="business" /></Route>
